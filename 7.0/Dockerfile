@@ -1,4 +1,4 @@
-FROM php:7.0.7-cli
+FROM marceloalmeida/php-docker:latest
 
 MAINTAINER Marcelo Almeida <marcelo.almeida@jumia.com>
 
@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   checkinstall \
   lsb-release \
   make \
+  php7.0-dev \
+  re2c \
+  runawk \
   wget
 
 COPY src /src
@@ -23,7 +26,7 @@ RUN mkdir /pkg
 RUN apt-get install -y librabbitmq-dev librabbitmq1
 
 # CREATE PACKAGE
-RUN pecl download amqp ;\
+RUN wget -q https://pecl.php.net/get/amqp-$VERSION.tgz ;\
   tar -zxvf amqp-$VERSION.tgz ;\
   cd amqp-$VERSION ;\
   cp -r /src/* /root/amqp-$VERSION/. ;\
