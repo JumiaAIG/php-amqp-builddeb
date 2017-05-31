@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY src /src
 
 # INSTALL PACKAGES DEPENDENCIES
-ENV VERSION=1.7.0 \
-    LIBRABBITC_VERSION=0.7.1
+ENV VERSION=1.9.0 \
+    LIBRABBITC_VERSION=0.8.0
 
 
 RUN mkdir /pkg

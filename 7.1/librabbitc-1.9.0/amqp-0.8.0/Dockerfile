@@ -1,4 +1,4 @@
-FROM marceloalmeida/php-docker:7.0
+FROM marceloalmeida/php-docker:7.1
 
 MAINTAINER Marcelo Almeida <marcelo.almeida@jumia.com>
 
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev \
   lsb-release \
   make \
-  php7.0-dev \
+  php7.1-dev \
   re2c \
   runawk \
   wget
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY src /src
 
 # INSTALL PACKAGES DEPENDENCIES
-ENV VERSION=1.7.0 \
-    LIBRABBITC_VERSION=0.7.1
+ENV VERSION=1.9.0 \
+    LIBRABBITC_VERSION=0.8.0
 
 
 RUN mkdir /pkg
@@ -44,6 +44,6 @@ RUN wget -q https://pecl.php.net/get/amqp-${VERSION}.tgz && \
   cp -r /src/* /root/amqp-${VERSION}/. && \
   phpize && \
   ./configure LIBS=/usr/lib/librabbitmq.so.4 ;\
-  checkinstall -y --install=no --pkgname='php7.0-amqp' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='https://github.com/pdezwart/php-amqp' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.0-common \(\>= 7.0.7\), librabbitmq1 \(\>= $LIBRABBITC_VERSION\)' --include=include_etc
+  checkinstall -y --install=no --pkgname='php7.1-amqp' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='https://github.com/pdezwart/php-amqp' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.1-common \(\>= 7.1.5\), librabbitmq1 \(\>= $LIBRABBITC_VERSION\)' --include=include_etc
 
 VOLUME ["/pkg"]
